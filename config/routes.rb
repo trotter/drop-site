@@ -9,6 +9,14 @@ DropSite::Application.routes.draw do |map|
     get :finalize
   end
 
+  resource :dropbox_pingback do
+    get  :uninstall
+    post :uninstall
+
+    get  :file
+    post :file
+  end
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
