@@ -1,6 +1,6 @@
 class WebsitesController < ApplicationController
   def index
     dropbox_session = Dropbox::Session.deserialize(session[:dropbox_session])
-    @directories = dropbox_session.ls('/')
+    @directories = dropbox_session.ls('/').select(&:directory?)
   end
 end
