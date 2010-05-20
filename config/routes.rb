@@ -1,5 +1,13 @@
 DropSite::Application.routes.draw do |map|
+  get "websites/index"
+
   get '/' => 'static#welcome'
+
+  resources :websites
+
+  resource :session do
+    get :finalize
+  end
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
