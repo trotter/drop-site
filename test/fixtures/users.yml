@@ -1,0 +1,11 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  name: MyString
+  session: MyText
+  subdomain: MyString
+
+two:
+  name: MyString
+  session: MyText
+  subdomain: MyString
