@@ -22,7 +22,7 @@ class SiteBuilder
 
   def find_needed_updates
     hash = @session.info("/").hash
-#    return if @user.last_hash == hash
+    return if @user.last_hash == hash
     @user.last_hash = hash
     @user.save
 
