@@ -38,7 +38,7 @@ class SiteBuilder
   end
 
   def download_files
-    dir = Rails.root.join('public', 'sites', @user.subdomain)
+    dir = File.join("/srv", "dropsite_sites", "public", @user.subdomain)
     @files_to_update.each do |on_dropbox|
       filename = dir.join(on_dropbox.path[1..-1])
       dirname  = File.dirname(filename)

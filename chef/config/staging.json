@@ -9,6 +9,10 @@
     "deploy_dir": "/srv/dropsite"
   },
 
+  "dropsite_sites": {
+    "hostname": "staging.dropsite.com"
+  },
+
   "main_user": "trotter",
   "main_group": "trotter",
 
@@ -35,6 +39,7 @@
 
   "recipes": [ "mysql::server",
                "private_ssh_keys",
-               "dropsite"
+               "dropsite",
+               "dropsite_sites"
              ]
 }
