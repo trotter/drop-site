@@ -23,7 +23,7 @@ class SiteBuilder
   def find_needed_updates
     hash = @session.info("/").hash
     return if @user.last_hash == hash
-    logger.info "Syncing User{id=#{@user.id};name=#{@user.name};subdomain=#{@user.subdomain}}"
+    Rails.logger.info "Syncing User{id=#{@user.id};name=#{@user.name};subdomain=#{@user.subdomain}}"
     @user.last_hash = hash
     @user.save
 
