@@ -6,7 +6,7 @@ gem 'rails', '3.0.0.beta3'
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
 gem 'sqlite3-ruby', :require => 'sqlite3'
-gem 'rdropbox', :require => 'dropbox', :git => 'http://github.com/RISCfuture/dropbox.git'
+gem 'rdropbox', :require => 'dropbox', :git => 'git://github.com/RISCfuture/dropbox.git'
 gem 'ruby-debug', :group => :development
 
 # Use unicorn as the web server
