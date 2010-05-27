@@ -41,7 +41,7 @@ class SiteBuilder
   def download_files
     dir = File.join("/srv", "dropsite_sites", "public", @user.subdomain)
     @files_to_update.each do |on_dropbox|
-      filename = dir.join(on_dropbox.path[1..-1])
+      filename = dir + on_dropbox.path
       dirname  = File.dirname(filename)
       FileUtils.mkdir_p(dirname) unless File.exist?(dirname)
       File.open(filename, "w") do |on_filesystem|
