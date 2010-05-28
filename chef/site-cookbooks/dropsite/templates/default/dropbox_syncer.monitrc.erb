@@ -1,0 +1,6 @@
+check process dropbox_syncer_<%= @worker_name %>
+  with pidfile <%= @deploy_dir %>/shared/pids/dropbox_syncer_<%= @worker_name %>.pid
+  start program = "<%= @deploy_dir %>/shared/dropbox_syncer_control start <%= @worker_name %> <%= @environment %>" as uid <%= @node[:main_user] %> and gid <%= @node[:main_group] %>
+  stop program = "<%= @deploy_dir %>/shared/dropbox_syncer_control stop <%= @worker_name %> <%= @environment %>"
+  if totalmem is greater than 300 MB for 10 cycles then restart
+  group dropbox_syncers

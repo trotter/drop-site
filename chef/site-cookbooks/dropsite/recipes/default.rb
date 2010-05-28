@@ -17,9 +17,12 @@
 # limitations under the License.
 #
 
+include_recipe "monit"
 include_recipe "git"
 include_recipe "apache2::mod_expires"
 include_recipe "passenger_apache2::mod_rails"
+
+package "coreutils" # Includes nohup, needed for our monit template
 
 gem_package "bundler"
 gem_package "rvm"
@@ -63,6 +66,7 @@ end
 
 deploy deploy_dir do
   repo              node[:dropsite_rails][:repo]
+  revision          node[:dropsite_rails][:revision]
   user              node[:main_user]
   group             node[:main_group]
   migrate           node[:dropsite_rails][:run_migrations]
@@ -82,6 +86,22 @@ deploy deploy_dir do
 
   action :deploy
   only_if { node[:dropsite_rails][:run_deploy] }
+  notifies :reload, resources(:service => "monit")
+end
+
+template "#{deploy_dir}/shared/dropbox_syncer_control" do
+  source "dropbox_syncer_control.erb"
+  owner  node[:main_user]
+  group  node[:main_group]
+  mode   "755"
+  variables :app_dir => app_dir
+end
+
+monitrc "dropbox_syncer" do
+  source "dropbox_syncer.monitrc.erb"
+  variables :environment => node[:dropsite_rails][:framework_env],
+            :deploy_dir => deploy_dir,
+            :worker_name => "all"
 end
 
 # Setup logrotate to rotate the logs

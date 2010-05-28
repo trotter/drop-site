@@ -1,0 +1,22 @@
+#!/bin/bash
+
+export HOME=/home/<%= @node[:main_user] %>
+export PATH=$PATH:<%= ENV['PATH'].chomp %>
+worker=$2
+env=$3
+
+case $1 in
+   start)
+      cd <%= @app_dir %>
+      RAILS_ENV=${env} nohup rake syncer:run > log/dropbox_syncer_${worker}.log 2>&1 &
+      echo $! > tmp/pids/dropbox_syncer_${worker}.pid
+      ;;
+    stop)
+      cd <%= @app_dir %>
+      kill -9 `cat tmp/pids/dropbox_syncer_${worker}.pid`
+      rm tmp/pids/dropbox_syncer_${worker}.pid
+      ;;
+    *)
+      echo "usage: dropbox_syncer_control {start|stop} worker_name rails_env" ;;
+esac
+exit 0
