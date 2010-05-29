@@ -7,7 +7,11 @@ gem 'rails', '3.0.0.beta3'
 
 gem 'mysql'
 gem 'rdropbox', :require => 'dropbox', :git => 'git://github.com/trotter/dropbox.git'
-gem 'ruby-debug', :group => :development
+gem 'ruby-debug'
+
+group :test do
+  gem 'mocha', :require => false
+end
 
 # Use unicorn as the web server
 # gem 'unicorn'

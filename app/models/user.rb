@@ -1,4 +1,6 @@
 class User < ActiveRecord::Base
+  has_many :paths
+
   def self.find_or_create_from_session(dropbox_session)
     name = dropbox_session.account.display_name
     unless ret = User.find_by_name(name)

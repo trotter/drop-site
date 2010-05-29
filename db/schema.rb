@@ -9,7 +9,16 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100522181712) do
+ActiveRecord::Schema.define(:version => 20100529014357) do
+
+  create_table "paths", :force => true do |t|
+    t.string   "path"
+    t.string   "last_hash"
+    t.boolean  "directory"
+    t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "users", :force => true do |t|
     t.string   "name"

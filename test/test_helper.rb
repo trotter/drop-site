@@ -1,13 +1,22 @@
 ENV["RAILS_ENV"] = "test"
 require File.expand_path('../../config/environment', __FILE__)
+require 'ruby-debug'
 require 'rails/test_help'
+require 'support/dropbox_data'
+require 'mocha'
 
 class ActiveSupport::TestCase
-  # Setup all fixtures in test/fixtures/*.(yml|csv) for all tests in alphabetical order.
-  #
-  # Note: You'll currently still have to declare fixtures explicitly in integration tests
-  # -- they do not yet inherit this setting
-  fixtures :all
+  # Gonna try not using fixtures
+  # fixtures :all
+  
+  # The global setup
+  setup do
+    stub_dropbox
+  end
 
-  # Add more helper methods to be used by all tests here...
+  def stub_dropbox
+    @mock_session = mock("session")
+    @mock_session.stubs(:ls).returns []
+    Dropbox::Session.stubs(:deserialize).returns(@mock_session)
+  end
 end
