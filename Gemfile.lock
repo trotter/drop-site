@@ -1,0 +1,111 @@
+--- 
+dependencies: 
+  ruby-debug: 
+    group: 
+    - :default
+    version: ">= 0"
+  rails: 
+    group: 
+    - :default
+    version: = 3.0.0.beta3
+  mysql: 
+    group: 
+    - :default
+    version: ">= 0"
+  mocha: 
+    group: 
+    - :test
+    version: ">= 0"
+    require: []
+
+  rdropbox: 
+    group: 
+    - :default
+    version: ">= 0"
+    require: 
+    - dropbox
+specs: 
+- rake: 
+    version: 0.8.7
+- abstract: 
+    version: 1.0.0
+- builder: 
+    version: 2.1.2
+- i18n: 
+    version: 0.3.7
+- memcache-client: 
+    version: 1.8.3
+- tzinfo: 
+    version: 0.3.20
+- activesupport: 
+    version: 3.0.0.beta3
+- activemodel: 
+    version: 3.0.0.beta3
+- erubis: 
+    version: 2.6.5
+- rack: 
+    version: 1.1.0
+- rack-mount: 
+    version: 0.6.3
+- rack-test: 
+    version: 0.5.4
+- actionpack: 
+    version: 3.0.0.beta3
+- mime-types: 
+    version: "1.16"
+- polyglot: 
+    version: 0.3.1
+- treetop: 
+    version: 1.4.5
+- mail: 
+    version: 2.2.1
+- text-hyphen: 
+    version: 1.0.0
+- text-format: 
+    version: 1.0.0
+- actionmailer: 
+    version: 3.0.0.beta3
+- arel: 
+    version: 0.3.3
+- activerecord: 
+    version: 3.0.0.beta3
+- activeresource: 
+    version: 3.0.0.beta3
+- bundler: 
+    version: 0.9.25
+- columnize: 
+    version: 0.3.1
+- json: 
+    version: 1.4.3
+- linecache: 
+    version: "0.43"
+- mocha: 
+    version: 0.9.8
+- multipart-post: 
+    version: 1.0.1
+- mysql: 
+    version: 2.8.1
+- oauth: 
+    version: 0.4.0
+- thor: 
+    version: 0.13.6
+- railties: 
+    version: 3.0.0.beta3
+- rails: 
+    version: 3.0.0.beta3
+- rdropbox: 
+    version: 1.0.0
+    source: 0
+- ruby-debug-base: 
+    version: 0.10.3
+- ruby-debug: 
+    version: 0.10.3
+hash: 19b935c7d8697d3ce23120152d93de85dd3cca83
+sources: 
+- Git: 
+    uri: git://github.com/trotter/dropbox.git
+    git: git://github.com/trotter/dropbox.git
+    require: dropbox
+    ref: 1547417eec18a6afc1b3e5a5c4a3c13da58d8afc
+- Rubygems: 
+    uri: http://rubygems.org
