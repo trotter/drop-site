@@ -7,9 +7,36 @@ class SiteBuilder
 
   def initialize(user)
     @user = user
-    @files_to_update = []
+    @updated_paths = []
+#    @files_to_update = []
   end
 
+  def update
+    path = get_or_create_path("/")
+    save_updated_paths
+  end
+
+  def get_or_create_path(path)
+    info = session.info("/")
+    path = @user.paths.find_by_path("/")
+    path ||= @user.paths.build
+    if path.last_hash != info.hash
+      path.take_attributes_from_info(info)
+      @updated_paths << path
+    end
+    path.hash if path
+  end
+
+  def session
+    @session ||= Dropbox::Session.deserialize(@user.session)
+  end
+
+  def save_updated_paths
+    # do nothing for now
+  end
+
+# old code
+=begin
   def run
     setup_session
     find_needed_updates
@@ -49,4 +76,5 @@ class SiteBuilder
       end
     end
   end
+=end
 end
