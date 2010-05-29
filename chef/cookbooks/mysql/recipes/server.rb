@@ -95,7 +95,10 @@ unless Chef::Config[:solo]
 end
 
 execute "mysql-install-privileges" do
-  command "/usr/bin/mysql -u root -p#{node[:mysql][:server_root_password]} < /etc/mysql/grants.sql"
+  pw = node[:mysql][:server_root_password]
+  has_password = pw && pw != ""
+  password_cmd = has_password ? "-p#{pw}" : ""
+  command "/usr/bin/mysql -u root #{password_cmd} < /etc/mysql/grants.sql"
   action :nothing
   subscribes :run, resources(:template => "/etc/mysql/grants.sql")
 end
