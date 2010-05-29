@@ -12,20 +12,12 @@ class SiteBuilder
   end
 
   def update
-    path = get_or_create_path("/")
+    update_tree
     save_updated_paths
   end
 
-  def get_or_create_path(path)
-    info = session.info("/")
-    path = @user.paths.find_by_path("/")
-    path ||= @user.paths.build
-    if path.last_hash != info.hash
-      path.take_attributes_from_info(info)
-      @updated_paths << path
-      get_or_create_subpaths(path) if path.directory?
-    end
-    path.hash if path
+  def update_tree
+    get_or_create_from_info(session.info("/"))
   end
 
   def get_or_create_subpaths(path)
@@ -42,7 +34,6 @@ class SiteBuilder
       @updated_paths << path
       get_or_create_subpaths(path) if path.directory?
     end
-    path.hash if path
   end
 
   def session
