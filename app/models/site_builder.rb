@@ -23,6 +23,24 @@ class SiteBuilder
     if path.last_hash != info.hash
       path.take_attributes_from_info(info)
       @updated_paths << path
+      get_or_create_subpaths(path) if path.directory?
+    end
+    path.hash if path
+  end
+
+  def get_or_create_subpaths(path)
+    session.ls(path.path).each do |info|
+      get_or_create_from_info(info)
+    end
+  end
+
+  def get_or_create_from_info(info)
+    path = @user.paths.find_by_path(info.path)
+    path ||= @user.paths.build
+    if path.last_hash != info.hash
+      path.take_attributes_from_info(info)
+      @updated_paths << path
+      get_or_create_subpaths(path) if path.directory?
     end
     path.hash if path
   end
