@@ -31,13 +31,14 @@ class SiteFinder
   def get_or_create_root(info)
     with_path_for(info) do |path|
       session.ls(path.path).each do |info|
-        update_website(info) if info.directory?
+        update_website(info, path) if info.directory?
       end
     end
   end
 
-  def update_website(info)
+  def update_website(info, root)
     with_path_for(info) do |path|
+      path.parent = root
       path.create_website
       @updated_websites << path.website
     end

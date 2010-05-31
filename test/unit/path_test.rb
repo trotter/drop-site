@@ -14,6 +14,12 @@ class PathTest < ActiveSupport::TestCase
     assert_equal @path.directory?, @info.directory?
   end
 
+  test "new_from_info should take an optional parent" do
+    parent = Path.new
+    path = Path.new_from_info(@info, :parent => parent)
+    assert_equal parent, path.parent
+  end
+
   test "should create_website" do
     website = @path.create_website
     assert_equal website, @path.website

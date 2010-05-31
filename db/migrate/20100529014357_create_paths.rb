@@ -5,6 +5,7 @@ class CreatePaths < ActiveRecord::Migration
       t.string     :last_hash
       t.boolean    :directory
       t.belongs_to :user
+      t.belongs_to :parent
 
       t.timestamps
     end

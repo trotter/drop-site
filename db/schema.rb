@@ -16,6 +16,7 @@ ActiveRecord::Schema.define(:version => 20100529032850) do
     t.string   "last_hash"
     t.boolean  "directory"
     t.integer  "user_id"
+    t.integer  "parent_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

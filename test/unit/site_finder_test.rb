@@ -19,6 +19,7 @@ class SitefinderTest < ActiveSupport::TestCase
     root_path = @user.paths.detect { |p| p.path == "/" }
     assert root_path
     assert_equal @user, root_path.user
+    assert_nil   root_path.parent
   end
 
   test "should not create paths for anything in root that's not a directory" do
@@ -30,7 +31,7 @@ class SitefinderTest < ActiveSupport::TestCase
     assert !@user.paths.detect { |p| p.path == DropboxData.ls_no_dirs.first.path }
   end
 
-  test "should create website for directories directly below root" do
+  test "should create paths for directories directly below root" do
     contents = DropboxData.ls_only_dirs
     @mock_session.expects(:info).with("/").returns DropboxData.root_info
     @mock_session.expects(:ls).with("/").returns contents
@@ -38,6 +39,18 @@ class SitefinderTest < ActiveSupport::TestCase
     @site_finder.update
     assert_equal 2, @user.paths.size
 
+    root_path    = @user.paths.detect { |p| p.path == "/" }
+    website_path = @user.paths.detect { |p| p.path == contents.first.path }
+    assert_equal root_path, website_path.parent
+    assert_equal @user,     website_path.user
+  end
+
+  test "should create website for directories directly below root" do
+    contents = DropboxData.ls_only_dirs
+    @mock_session.expects(:info).with("/").returns DropboxData.root_info
+    @mock_session.expects(:ls).with("/").returns contents
+
+    @site_finder.update
     website_path = @user.paths.detect { |p| p.path == contents.first.path }
     assert website_path
     assert_equal 1, @user.websites.size
