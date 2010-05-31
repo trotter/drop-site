@@ -7,8 +7,8 @@ class SiteFinder
 
   def update
     find_websites
-    save_paths
     update_websites
+    save_paths
   end
 
   def find_websites

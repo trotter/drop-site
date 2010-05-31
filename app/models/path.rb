@@ -1,7 +1,7 @@
 class Path < ActiveRecord::Base
   belongs_to :parent, :class_name => "Path"
   belongs_to :user
-  has_one    :website
+  has_one    :website, :dependent => :destroy
 
   def self.new_from_info(*args)
     ret = new

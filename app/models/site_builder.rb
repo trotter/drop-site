@@ -5,8 +5,10 @@ class SiteBuilder
     new(user).run
   end
 
-  def initialize(user)
-    @user = user
+  def initialize(user, session, website)
+    @user    = user
+    @session = session
+    @website = website
     @updated_paths = []
 #    @files_to_update = []
   end
@@ -14,30 +16,33 @@ class SiteBuilder
   def update
     update_tree
     update_filesystem
+    save_paths
   end
 
-  def update_tree
-    get_or_create_from_info(session.info("/"), :is_root => true)
-  end
-
-  def get_or_create_subpaths(path, opts={})
-    session.ls(path.path).each do |info|
-      get_or_create_from_info(info, opts)
+  def save_paths
+    @updated_paths.each do |path|
+      path.save
     end
   end
 
-  def get_or_create_from_info(info, opts={})
+  def update_tree
+    get_or_create_subpaths(@website.path)
+  end
+
+  def get_or_create_subpaths(path)
+    session.ls(path.path).each do |info|
+      get_or_create_from_info(info)
+    end
+  end
+
+  def get_or_create_from_info(info)
     path = @user.paths.find_by_path(info.path)
-    path ||= @user.paths.build(:user => @user)
+    path ||= @user.paths.build(:user => @user, :parent => @website.path)
     if path.last_hash != info.hash
       path.take_attributes_from_info(info)
       @updated_paths << path
       if path.directory?
-        path.create_website if opts[:create_websites]
-
-        new_opts = {}
-        new_opts[:create_websites] = opts[:is_root]
-        get_or_create_subpaths(path, new_opts)
+        get_or_create_subpaths(path)
       end
     end
   end
