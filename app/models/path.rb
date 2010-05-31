@@ -16,6 +16,8 @@ class Path < ActiveRecord::Base
 
   def create_website
     return if website
-    user.websites << Website.new_from_path(self)
+    self.website = Website.new_from_path(self)
+    user.websites << self.website
+    website
   end
 end
