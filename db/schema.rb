@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100529014357) do
+ActiveRecord::Schema.define(:version => 20100529032850) do
 
   create_table "paths", :force => true do |t|
     t.string   "path"
@@ -25,6 +25,15 @@ ActiveRecord::Schema.define(:version => 20100529014357) do
     t.text     "session"
     t.string   "subdomain"
     t.string   "last_hash"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "websites", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "path_id"
+    t.string   "subdomain"
+    t.boolean  "active"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

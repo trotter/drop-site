@@ -1,5 +1,6 @@
 class User < ActiveRecord::Base
   has_many :paths
+  has_many :websites
 
   def self.find_or_create_from_session(dropbox_session)
     name = dropbox_session.account.display_name

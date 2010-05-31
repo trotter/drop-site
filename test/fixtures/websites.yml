@@ -1,0 +1,13 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  user: 
+  path: 
+  subdomain: MyString
+  active: false
+
+two:
+  user: 
+  path: 
+  subdomain: MyString
+  active: false
