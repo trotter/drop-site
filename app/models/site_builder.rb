@@ -13,26 +13,32 @@ class SiteBuilder
 
   def update
     update_tree
-    save_updated_paths
+    update_filesystem
   end
 
   def update_tree
-    get_or_create_from_info(session.info("/"))
+    get_or_create_from_info(session.info("/"), :is_root => true)
   end
 
-  def get_or_create_subpaths(path)
+  def get_or_create_subpaths(path, opts={})
     session.ls(path.path).each do |info|
-      get_or_create_from_info(info)
+      get_or_create_from_info(info, opts)
     end
   end
 
-  def get_or_create_from_info(info)
+  def get_or_create_from_info(info, opts={})
     path = @user.paths.find_by_path(info.path)
-    path ||= @user.paths.build
+    path ||= @user.paths.build(:user => @user)
     if path.last_hash != info.hash
       path.take_attributes_from_info(info)
       @updated_paths << path
-      get_or_create_subpaths(path) if path.directory?
+      if path.directory?
+        path.create_website if opts[:create_websites]
+
+        new_opts = {}
+        new_opts[:create_websites] = opts[:is_root]
+        get_or_create_subpaths(path, new_opts)
+      end
     end
   end
 
@@ -40,7 +46,7 @@ class SiteBuilder
     @session ||= Dropbox::Session.deserialize(@user.session)
   end
 
-  def save_updated_paths
+  def update_filesystem
     # do nothing for now
   end
 
