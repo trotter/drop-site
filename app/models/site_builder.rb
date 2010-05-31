@@ -1,6 +1,10 @@
 require 'fileutils'
 
 class SiteBuilder
+  def self.root
+    File.join("/srv", "dropsite_sites", "public")
+  end
+
   def self.run(user)
     new(user).run
   end
@@ -10,7 +14,6 @@ class SiteBuilder
     @session = session
     @website = website
     @updated_paths = []
-#    @files_to_update = []
   end
 
   def update
@@ -51,50 +54,18 @@ class SiteBuilder
     @session ||= Dropbox::Session.deserialize(@user.session)
   end
 
+  def root
+    self.class.root + "/" + @website.subdomain 
+  end
+
   def update_filesystem
-    # do nothing for now
-  end
-
-# old code
-=begin
-  def run
-    setup_session
-    find_needed_updates
-    download_files
-  end
-
-  def setup_session
-    @session = Dropbox::Session.deserialize(@user.session)
-  end
-
-  def find_needed_updates
-    hash = @session.info("/").hash
-    return if @user.last_hash == hash
-    Rails.logger.info "Syncing User{id=#{@user.id};name=#{@user.name};subdomain=#{@user.subdomain}}"
-    @user.last_hash = hash
-    @user.save
-
-    @files_to_update = @session.ls("/")
-    @files_to_update.map! do |f|
-      if f.directory?
-        @session.ls(f.path)
-      else
-        f
-      end
-    end
-    @files_to_update.flatten!
-  end
-
-  def download_files
-    dir = File.join("/srv", "dropsite_sites", "public", @user.subdomain)
-    @files_to_update.each do |on_dropbox|
-      filename = dir + on_dropbox.path
+    @updated_paths.each do |path|
+      filename = root + path.path
       dirname  = File.dirname(filename)
       FileUtils.mkdir_p(dirname) unless File.exist?(dirname)
       File.open(filename, "w") do |on_filesystem|
-        on_filesystem.write(@session.download(on_dropbox.path))
+        on_filesystem.write(@session.download(path.path))
       end
     end
   end
-=end
 end

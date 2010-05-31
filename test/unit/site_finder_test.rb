@@ -95,4 +95,8 @@ class SitefinderTest < ActiveSupport::TestCase
     @mock_session.expects(:info).with("/").returns DropboxData.root_info
     @site_finder.update
   end
+
+  test "should remove paths that were deleted on dropbox" do
+    pending
+  end
 end
