@@ -68,11 +68,18 @@ class SitefinderTest < ActiveSupport::TestCase
     @site_finder.update
   end
 
-  test "should not bother with websites if root hash matches" do
+  test "should update websites even if root hash matches" do
     @user.paths.expects(:find_by_path).with("").
       returns Path.new_from_info(DropboxData.root_info)
     @mock_session.expects(:info).with("").returns DropboxData.root_info_only_dirs
-    SiteBuilder.expects(:new).never
+
+    @user.stubs(:websites).returns [Website.new]
+
+    mock_site_builder = mock("site_builder")
+    mock_site_builder.expects(:update)
+    SiteBuilder.expects(:new).with(@user, @mock_session, instance_of(Website)).
+      returns mock_site_builder
+
     @site_finder.update
   end
 

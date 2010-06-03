@@ -27,9 +27,9 @@ class SiteFinder
   end
 
   def update_websites
-    @updated_websites.each do |site|
-      Rails.logger.info "[SiteFinder#update_websites] Updating #{site.subdomain}"
-      site.save
+    @user.websites.each do |site|
+      Rails.logger.info "[SiteFinder#update_websites] Updating Website{subdomain=#{site.subdomain};id=#{site.id};user_id=#{site.user_id}"
+      site.save if site.new_record?
       SiteBuilder.new(@user, session, site).update
     end
   end
