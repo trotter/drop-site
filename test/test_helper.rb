@@ -17,6 +17,8 @@ class ActiveSupport::TestCase
   def stub_dropbox
     @mock_session = mock("session")
     @mock_session.stubs(:ls).returns []
+    @mock_session.stubs(:info).with("/some.txt").returns DropboxData.file_info
+    @mock_session.stubs(:info).with("/cool-site").returns DropboxData.dir_info
     @mock_session.stubs(:account).returns({:display_name => "Trotter Cashion"}.to_struct)
     @mock_session.stubs(:authorize)
     @mock_session.stubs(:serialize).returns("serialized_session")
