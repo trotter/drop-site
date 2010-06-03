@@ -62,16 +62,6 @@ class SiteFinder
     end
   end
 
-  def with_path_for(info)
-    path = @user.paths.find_by_path(info.path)
-    path ||= @user.paths.build(:user => @user)
-    if path.last_hash != info.hash
-      @updated_paths << path
-      path.take_attributes_from_info(info)
-      yield path
-    end
-  end
-
   def session
     @session ||= Dropbox::Session.deserialize(@user.session)
   end
