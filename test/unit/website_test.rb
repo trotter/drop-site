@@ -5,9 +5,10 @@ class WebsiteTest < ActiveSupport::TestCase
     path    = Path.new_from_info(DropboxData.ls_only_dirs.first)
     website = Website.new_from_path(path)
 
-    assert_equal path,                   website.path
+    assert_equal path,                   website.root_path
     assert_equal path.user,              website.user
     assert_equal path.path.sub("/", ""), website.subdomain
+
     assert       website.active?
   end
 

@@ -1,10 +1,11 @@
 class Website < ActiveRecord::Base
   belongs_to :user
-  belongs_to :path
+  belongs_to :root_path, :class_name => "Path"
+  has_many   :paths, :dependent => :destroy
 
   def self.new_from_path(path)
     ret = new
-    ret.path      = path
+    ret.root_path = path
     ret.user      = path.user
     ret.subdomain = path.path[1..-1]
     ret.active    = ret.can_be_active?

@@ -6,6 +6,7 @@ class CreatePaths < ActiveRecord::Migration
       t.boolean    :directory
       t.belongs_to :user
       t.belongs_to :parent
+      t.belongs_to :website
 
       t.timestamps
     end

@@ -17,6 +17,7 @@ class SiteBuilderTest < ActiveSupport::TestCase
     new_path = @user.paths.detect { |p| p.path == contents.first.path }
     assert new_path
     assert_equal @path, new_path.parent
+    assert_equal @website, path.website
   end
 
   test "should save paths" do
