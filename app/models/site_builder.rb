@@ -60,6 +60,7 @@ class SiteBuilder
 
   def update_filesystem
     @updated_paths.each do |path|
+      next if path.directory?
       filename = root + path.path
       dirname  = File.dirname(filename)
       FileUtils.mkdir_p(dirname) unless File.exist?(dirname)
