@@ -4,7 +4,7 @@ class SiteBuilderTest < ActiveSupport::TestCase
   setup do
     @user = User.new(:session => "blah")
     @path = Path.new_from_info(DropboxData.root_info, :user => @user)
-    @website = Website.new(:user => @user, :subdomain => "bob", :path => @path)
+    @website = Website.new(:user => @user, :subdomain => "bob", :path => @path, :active => true)
     @site_builder = SiteBuilder.new(@user, @mock_session, @website)
   end
 
@@ -15,7 +15,6 @@ class SiteBuilderTest < ActiveSupport::TestCase
     @site_builder.update
 
     new_path = @user.paths.detect { |p| p.path == contents.first.path }
-    debugger; 1
     assert new_path
     assert_equal @path, new_path.parent
   end
@@ -41,6 +40,12 @@ class SiteBuilderTest < ActiveSupport::TestCase
 
     @mock_session.expects(:download).with(contents.first.path)
 
+    @site_builder.update
+  end
+
+  test "should do nothing if the site is not active" do
+    @site_builder.expects(:update_filesystem).never
+    @website.active = false
     @site_builder.update
   end
 

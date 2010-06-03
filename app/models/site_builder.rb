@@ -17,6 +17,7 @@ class SiteBuilder
   end
 
   def update
+    return unless @website.active?
     update_tree
     update_filesystem
     save_paths
