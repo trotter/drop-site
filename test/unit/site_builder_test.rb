@@ -30,7 +30,7 @@ class SiteBuilderTest < ActiveSupport::TestCase
     contents = DropboxData.ls_no_dirs
     @mock_session.expects(:ls).with(@path.path).returns contents
 
-    dirname = SiteBuilder.root + "/" + @website.subdomain
+    dirname = SiteBuilder.root
     File.expects(:exist?).with(dirname).returns false
     FileUtils.expects(:mkdir_p).with(dirname)
 

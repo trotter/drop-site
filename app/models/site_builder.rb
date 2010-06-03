@@ -55,7 +55,7 @@ class SiteBuilder
   end
 
   def root
-    self.class.root + "/" + @website.subdomain 
+    self.class.root
   end
 
   def update_filesystem
