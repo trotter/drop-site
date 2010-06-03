@@ -15,6 +15,7 @@ class SiteBuilderTest < ActiveSupport::TestCase
     @site_builder.update
 
     new_path = @user.paths.detect { |p| p.path == contents.first.path }
+    debugger; 1
     assert new_path
     assert_equal @path, new_path.parent
   end

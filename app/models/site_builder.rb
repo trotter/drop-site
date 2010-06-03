@@ -34,13 +34,14 @@ class SiteBuilder
 
   def get_or_create_subpaths(path)
     session.ls(path.path).each do |info|
-      get_or_create_from_info(info)
+      subpath = @user.paths.find_by_path(info.path)
+      subpath ||= @user.paths.build(:path => info.path, :user => @user, :parent => @website.path)
+      get_or_create_from_path(subpath, path)
     end
   end
 
-  def get_or_create_from_info(info)
-    path = @user.paths.find_by_path(info.path)
-    path ||= @user.paths.build(:user => @user, :parent => @website.path)
+  def get_or_create_from_path(path, parent)
+    info = session.info(path.path)
     if path.last_hash != info.hash
       path.take_attributes_from_info(info)
       @updated_paths << path
