@@ -36,10 +36,8 @@ class SiteBuilder
   def get_or_create_subpaths(path)
     session.ls(path.path).each do |info|
       subpath = @user.paths.find_by_path(info.path)
-      unless subpath
-        subpath = @user.paths.build(:path => info.path, :user => @user, :parent => path, :website => @website)
-        get_or_create_from_path(subpath, path)
-      end
+      subpath ||= @user.paths.build(:path => info.path, :user => @user, :parent => path, :website => @website)
+      get_or_create_from_path(subpath, path) unless subpath.directory
     end
   end
 
