@@ -2,7 +2,8 @@ class Path < ActiveRecord::Base
   belongs_to :parent, :class_name => "Path"
   belongs_to :user
   belongs_to :website
-  has_one    :owned_website, :class_name => "Website", :dependent => :destroy
+  has_one    :owned_website, :class_name => "Website",
+             :dependent => :destroy, :foreign_key => :root_path_id
 
   scope :directory, where(:directory => true)
 
