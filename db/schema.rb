@@ -17,6 +17,7 @@ ActiveRecord::Schema.define(:version => 20100529032850) do
     t.boolean  "directory"
     t.integer  "user_id"
     t.integer  "parent_id"
+    t.integer  "website_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -32,7 +33,7 @@ ActiveRecord::Schema.define(:version => 20100529032850) do
 
   create_table "websites", :force => true do |t|
     t.integer  "user_id"
-    t.integer  "path_id"
+    t.integer  "root_path_id"
     t.string   "subdomain"
     t.boolean  "active"
     t.datetime "created_at"

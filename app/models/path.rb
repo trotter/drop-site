@@ -4,6 +4,8 @@ class Path < ActiveRecord::Base
   belongs_to :website
   has_one    :owned_website, :class_name => "Website", :dependent => :destroy
 
+  scope :directory, where(:directory => true)
+
   def self.new_from_info(*args)
     ret = new
     ret.take_attributes_from_info(*args)

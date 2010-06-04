@@ -30,14 +30,16 @@ class SiteBuilder
   end
 
   def update_tree
-    get_or_create_subpaths(@website.path)
+    @website.paths.directory.each { |path| get_or_create_subpaths(path) }
   end
 
   def get_or_create_subpaths(path)
     session.ls(path.path).each do |info|
       subpath = @user.paths.find_by_path(info.path)
-      subpath ||= @user.paths.build(:path => info.path, :user => @user, :parent => @website.path)
-      get_or_create_from_path(subpath, path)
+      unless subpath
+        subpath = @user.paths.build(:path => info.path, :user => @user, :parent => path, :website => @website)
+        get_or_create_from_path(subpath, path)
+      end
     end
   end
 

@@ -4,7 +4,8 @@ class SiteBuilderTest < ActiveSupport::TestCase
   setup do
     @user = User.new(:session => "blah")
     @path = Path.new_from_info(DropboxData.root_info, :user => @user)
-    @website = Website.new(:user => @user, :subdomain => "bob", :path => @path, :active => true)
+    @website = Website.new(:user => @user, :subdomain => "bob", :active => true)
+    @website.paths.stubs(:directory).returns [@path]
     @site_builder = SiteBuilder.new(@user, @mock_session, @website)
   end
 
@@ -17,7 +18,7 @@ class SiteBuilderTest < ActiveSupport::TestCase
     new_path = @user.paths.detect { |p| p.path == contents.first.path }
     assert new_path
     assert_equal @path, new_path.parent
-    assert_equal @website, path.website
+    assert_equal @website, new_path.website
   end
 
   test "should save paths" do
