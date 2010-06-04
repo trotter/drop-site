@@ -54,7 +54,7 @@ class SiteFinder
   end
 
   def find_updates_for(path)
-    info = session.info(path.path)
+    info = session.info(path.path.dup)
     if path.last_hash != info.hash
       @updated_paths << path
       path.take_attributes_from_info(info)

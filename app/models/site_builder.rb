@@ -34,7 +34,7 @@ class SiteBuilder
   end
 
   def get_or_create_subpaths(path)
-    session.ls(path.path).each do |info|
+    session.ls(path.path.dup).each do |info|
       subpath = @user.paths.find_by_path(info.path)
       subpath ||= @user.paths.build(:path => info.path, :user => @user, :parent => path, :website => @website)
       get_or_create_from_path(subpath, path) unless subpath.directory
@@ -42,7 +42,7 @@ class SiteBuilder
   end
 
   def get_or_create_from_path(path, parent)
-    info = session.info(path.path)
+    info = session.info(path.path.dup)
     if path.last_hash != info.hash
       path.take_attributes_from_info(info)
       @updated_paths << path
@@ -67,7 +67,7 @@ class SiteBuilder
       dirname  = File.dirname(filename)
       FileUtils.mkdir_p(dirname) unless File.exist?(dirname)
       File.open(filename, "w") do |on_filesystem|
-        on_filesystem.write(@session.download(path.path))
+        on_filesystem.write(@session.download(path.path.dup))
       end
     end
   end
