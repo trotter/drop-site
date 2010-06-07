@@ -1,51 +1,73 @@
 require 'fileutils'
 
 class SiteBuilder
+  def self.root
+    File.join("/srv", "dropsite_sites", "public")
+  end
+
   def self.run(user)
     new(user).run
   end
 
-  def initialize(user)
-    @user = user
-    @files_to_update = []
+  def initialize(user, session, website)
+    @user    = user
+    @session = session
+    @website = website
+    @updated_paths = []
   end
 
-  def run
-    setup_session
-    find_needed_updates
-    download_files
+  def update
+    return unless @website.active?
+    update_tree
+    update_filesystem
+    save_paths
   end
 
-  def setup_session
-    @session = Dropbox::Session.deserialize(@user.session)
+  def save_paths
+    @updated_paths.each do |path|
+      path.save
+    end
   end
 
-  def find_needed_updates
-    hash = @session.info("/").hash
-    return if @user.last_hash == hash
-    Rails.logger.info "Syncing User{id=#{@user.id};name=#{@user.name};subdomain=#{@user.subdomain}}"
-    @user.last_hash = hash
-    @user.save
+  def update_tree
+    @website.paths.directory.each { |path| get_or_create_subpaths(path) }
+  end
 
-    @files_to_update = @session.ls("/")
-    @files_to_update.map! do |f|
-      if f.directory?
-        @session.ls(f.path)
-      else
-        f
+  def get_or_create_subpaths(path)
+    session.ls(path.path.dup).each do |info|
+      subpath = @user.paths.find_by_path(info.path)
+      subpath ||= @user.paths.build(:path => info.path, :user => @user, :parent => path, :website => @website)
+      get_or_create_from_path(subpath, path) unless subpath.directory
+    end
+  end
+
+  def get_or_create_from_path(path, parent)
+    info = session.info(path.path.dup)
+    if path.last_hash != info.hash
+      path.take_attributes_from_info(info)
+      @updated_paths << path
+      if path.directory?
+        get_or_create_subpaths(path)
       end
     end
-    @files_to_update.flatten!
   end
 
-  def download_files
-    dir = File.join("/srv", "dropsite_sites", "public", @user.subdomain)
-    @files_to_update.each do |on_dropbox|
-      filename = dir + on_dropbox.path
+  def session
+    @session ||= Dropbox::Session.deserialize(@user.session)
+  end
+
+  def root
+    self.class.root
+  end
+
+  def update_filesystem
+    @updated_paths.each do |path|
+      next if path.directory?
+      filename = root + path.path
       dirname  = File.dirname(filename)
       FileUtils.mkdir_p(dirname) unless File.exist?(dirname)
       File.open(filename, "w") do |on_filesystem|
-        on_filesystem.write(@session.download(on_dropbox.path))
+        on_filesystem.write(@session.download(path.path.dup))
       end
     end
   end

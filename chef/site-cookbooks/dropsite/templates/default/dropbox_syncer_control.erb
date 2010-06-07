@@ -8,7 +8,7 @@ env=$3
 case $1 in
    start)
       cd <%= @app_dir %>
-      RAILS_ENV=${env} nohup rake syncer:run > log/dropbox_syncer_${worker}.log 2>&1 &
+      RAILS_ENV=${env} nohup rake syncer:run --trace > log/dropbox_syncer_${worker}.log 2>&1 &
       echo $! > tmp/pids/dropbox_syncer_${worker}.pid
       ;;
     stop)

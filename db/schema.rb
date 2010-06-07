@@ -9,13 +9,33 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100522181712) do
+ActiveRecord::Schema.define(:version => 20100529032850) do
+
+  create_table "paths", :force => true do |t|
+    t.string   "path"
+    t.string   "last_hash"
+    t.boolean  "directory"
+    t.integer  "user_id"
+    t.integer  "parent_id"
+    t.integer  "website_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "users", :force => true do |t|
     t.string   "name"
     t.text     "session"
     t.string   "subdomain"
     t.string   "last_hash"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "websites", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "root_path_id"
+    t.string   "subdomain"
+    t.boolean  "active"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
