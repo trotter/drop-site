@@ -15,6 +15,24 @@ p {
   line-height: 20px;
 }
 
+input[type="submit"] {
+  background: transparent url("../images/button.png") no-repeat;
+  width: 191px;
+  height: 30px;
+  border: none;
+  font-weight: bold;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+input[type="submit"]:hover {
+  background-position: 0 -30px;
+}
+
+input[type="submit"]:active {
+  background-position: 0 -60px;
+}
+
 .jayz {
   width: 840px;
   margin: auto;
@@ -52,13 +70,20 @@ p {
 
 #letter {
   float: right;
-  margin: -77px 0 0 20px;
+  margin: -50px 0 0 20px;
 }
 
 #signup_request_email {
-  font-size: 18px;
+  font-size: 20px;
+  font-weight: bold;
   height: 38px;
   border: 1px solid black;
   padding: 0 10px;
   margin-bottom: 10px;
+  width: 350px;
+}
+
+#signup_request_email.default {
+  color: #666;
+  font-weight: normal;
 }

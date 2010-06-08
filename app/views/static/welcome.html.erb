@@ -15,11 +15,12 @@ your very imporant website.</p>
 
 <p>The Internet is a place where website hosting is cheap, easy, and
 understandable. Collaboration is simple, and no one person has the keys to the
-site. At SimpleTubes, we make the Internet what it should be. Register for the
-Beta and find out how.</p>
+site. At SimpleTubes, we make the Internet what it should be. Enter your email
+address in the box below to register for the Beta and find out how SimpleTubes
+makes the Internet better.</p>
 
 <h2>Register for the Beta</h2>
 <%= form_for :signup_request do |f| %>
-  <%= f.text_field :email, :value => "Email Address" %><br />
+  <%= f.text_field :email, :class => "default", :value => "Type your email address here!" %> &raquo; Email Address<br />
   <%= submit_tag "Sign-up Now" %>
 <% end %>
