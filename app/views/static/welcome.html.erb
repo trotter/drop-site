@@ -24,3 +24,7 @@ makes the Internet better.</p>
   <%= f.text_field :email, :class => "default", :value => "Type your email address here!" %> &raquo; Email Address<br />
   <%= submit_tag "Sign-up Now" %>
 <% end %>
+
+<% content_for :javascripts do %>
+  <%= javascript_include_tag  "pages/static_welcome" %>
+<% end %>
