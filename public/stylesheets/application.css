@@ -2,6 +2,10 @@ body, select, input, button, textarea {
   font-family: Helvetica, Arial, sans-serif;
 }
 
+body {
+  background: #e9eaea;
+}
+
 h2 {
   font-size: 22px;
 }
@@ -18,8 +22,7 @@ p {
 .header {
   height: 80px;
   background-color: #0082bc;
-  /* remove when reset is put in */
-  margin-bottom: 20px;
+  margin-bottom: 40px;
 }
 
 .header .jayz {
@@ -35,5 +38,18 @@ p {
   position: relative;
   float: right;
   top: 30px;
-  right: 0;
+  right: 0px;
+}
+
+.static-welcome h2 {
+  margin-bottom: 15px;
+}
+
+.static-welcome p {
+  margin-bottom: 40px;
+}
+
+#letter {
+  float: right;
+  margin-top: -77px;
 }
