@@ -2,7 +2,7 @@
 <html>
 <head>
   <title>DropSite</title>
-  <%= stylesheet_link_tag "reset", "application", :bundle => "main" %>
+  <%= stylesheet_link_tag "lib/reset", "pages/application", :bundle => "application" %>
   <%= csrf_meta_tag %>
 </head>
 <body class="<%= "#{controller_name}-#{action_name}" %>">
@@ -10,7 +10,7 @@
   <div class="jayz">
     <%= yield %>
   </div>
-  <%= javascript_include_tag "jquery-1.4.2-min" %>
+  <%= javascript_include_tag "lib/jquery-1.4.2.min.js" %>
   <%= yield :javascripts %>
 </body>
 </html>

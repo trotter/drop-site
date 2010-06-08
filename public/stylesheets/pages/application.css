@@ -16,7 +16,7 @@ p {
 }
 
 input[type="submit"] {
-  background: transparent url("../images/button.png") no-repeat;
+  background: transparent url("../../images/button.png") no-repeat;
   width: 191px;
   height: 30px;
   border: none;
@@ -45,7 +45,7 @@ input[type="submit"]:active {
 }
 
 .header .jayz {
-  background: transparent url("../images/stLogo.png") no-repeat 0 18px;
+  background: transparent url("../../images/stLogo.png") no-repeat 0 18px;
   height: 80px;
 }
 
