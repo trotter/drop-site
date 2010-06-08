@@ -1,3 +1,16 @@
-<%= form_tag session_path do %>
-  <%= submit_tag "Login using Dropbox" %>
+<% content_for :header do %>
+  <%= button_to "Login using Dropbox", session_path, :class => "login" %>
+<% end %>
+
+<h2>This is Not the Internet</h2>
+<p>Some text to make them feel awesome.</p>
+
+<h2>This is the Internet</h2>
+<p>Some other text to make them feel awesome.</p>
+
+<h2>Register for Beta</h2>
+<p>Some info about the beta</p>
+<%= form_for :signup_request do |f| %>
+  <%= f.text_field :email, :value => "Email Address" %><br />
+  <%= submit_tag "Sign-up Now" %>
 <% end %>

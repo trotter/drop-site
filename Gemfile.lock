@@ -8,6 +8,10 @@ dependencies:
     group: 
     - :default
     version: = 3.0.0.beta3
+  mongrel: 
+    group: 
+    - :development
+    version: ">= 0"
   mysql: 
     group: 
     - :default
@@ -73,14 +77,24 @@ specs:
     version: 3.0.0.beta3
 - bundler: 
     version: 0.9.25
+- cgi_multipart_eof_fix: 
+    version: 2.5.0
 - columnize: 
     version: 0.3.1
+- daemons: 
+    version: 1.0.10
+- fastthread: 
+    version: 1.0.7
+- gem_plugin: 
+    version: 0.2.3
 - json: 
     version: 1.4.3
 - linecache: 
     version: "0.43"
 - mocha: 
     version: 0.9.8
+- mongrel: 
+    version: 1.1.5
 - multipart-post: 
     version: 1.0.1
 - mysql: 
@@ -100,7 +114,7 @@ specs:
     version: 0.10.3
 - ruby-debug: 
     version: 0.10.3
-hash: 19b935c7d8697d3ce23120152d93de85dd3cca83
+hash: 6d9a7d7d7dc51e4b923273d56faac24140c479a1
 sources: 
 - Git: 
     uri: git://github.com/trotter/dropbox.git

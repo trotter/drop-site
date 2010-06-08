@@ -1,0 +1,39 @@
+body, select, input, button, textarea {
+  font-family: Helvetica, Arial, sans-serif;
+}
+
+h2 {
+  font-size: 22px;
+}
+
+p {
+  font-size: 16px;
+}
+
+.jayz {
+  width: 800px;
+  margin: auto;
+}
+
+.header {
+  height: 80px;
+  background-color: #0082bc;
+  /* remove when reset is put in */
+  margin-bottom: 20px;
+}
+
+.header .jayz {
+  background: transparent url("../images/stLogo.png") no-repeat 0 18px;
+  height: 80px;
+}
+
+.header h1 {
+  display: none;
+}
+
+.header .login {
+  position: relative;
+  float: right;
+  top: 30px;
+  right: 0;
+}
