@@ -1,7 +1,7 @@
 DropSite::Application.routes.draw do |map|
   get "websites/index"
 
-  get '/' => 'static#welcome'
+  get '/' => 'static#welcome', :as => "root"
 
   resources :websites
 

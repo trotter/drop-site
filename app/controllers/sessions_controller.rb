@@ -9,6 +9,8 @@ class SessionsController < ApplicationController
     dropbox_session = Dropbox::Session.deserialize(session[:dropbox_session])
     dropbox_session.authorize(params)
     session[:dropbox_session] = dropbox_session.serialize # re-serialize the authenticated session
+    self.current_user = User.find_or_create_from_session(dropbox_session)
+
 
     redirect_to websites_url
   end
