@@ -54,10 +54,8 @@ input[type="submit"]:active {
 }
 
 .header .login {
-  position: relative;
   float: right;
-  top: 30px;
-  right: 0px;
+  margin-top: 25px;
 }
 
 .static-welcome h2 {
