@@ -4,6 +4,7 @@ DropSite::Application.routes.draw do |map|
   get '/' => 'static#welcome', :as => "root"
 
   resources :websites
+  resources :beta_signups
 
   resource :session do
     get :finalize
