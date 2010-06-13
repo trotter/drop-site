@@ -24,4 +24,13 @@ class ActiveSupport::TestCase
     @mock_session.stubs(:serialize).returns("serialized_session")
     Dropbox::Session.stubs(:deserialize).returns(@mock_session)
   end
+
+  def login(user=nil)
+    id = 12345
+    @current_user = user || User.new do |u|
+      u.id = id
+    end
+    User.stubs(:find_by_id).with(id).returns @current_user
+    session[:user_id] = id
+  end
 end

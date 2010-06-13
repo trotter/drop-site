@@ -53,7 +53,7 @@ class SitefinderTest < ActiveSupport::TestCase
     website_path = @user.paths.detect { |p| p.path == contents.first.path }
     assert website_path
     assert_equal 1, @user.websites.size
-    assert_equal website_path, @user.websites.first.path
+    assert_equal website_path, @user.websites.first.root_path
   end
 
   test "should update each website" do
