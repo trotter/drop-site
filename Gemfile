@@ -14,6 +14,8 @@ group :development do
 end
 
 group :test do
+  gem 'capybara'
+  gem 'cucumber-rails'
   gem 'mocha', :require => false
 end
 

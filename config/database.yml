@@ -9,10 +9,13 @@ development:
   <<: *common
   database: dropsite_development
 
-test:
+test: &test
   <<: *common
   database: dropsite_test
 
 production:
   <<: *common
   database: dropsite_production
+
+cucumber:
+  <<: *test
