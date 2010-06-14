@@ -10,7 +10,7 @@ module StaticHelper
     return unless flash[:errors]
     content_tag 'ul', :class => "error-messages" do
       flash[:errors].map do |error|
-        content_tag 'li', error
+        content_tag 'li', raw("&raquo; #{h(error)}")
       end.join('')
     end
   end

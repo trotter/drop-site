@@ -86,7 +86,18 @@ input[type="submit"]:active {
   font-weight: normal;
 }
 
-p.success-message {
+p.success-message, .error-messages {
+  width: 500px;
+  margin-bottom: 10px;
+}
+
+.error-messages {
+  width: 480px;
+  padding: 10px 10px 5px 10px;
+  background: #fff;
+  border: 1px solid #f33;
+}
+
+.error-messages li {
   margin-bottom: 5px;
-  width: 400px;
 }
