@@ -71,7 +71,7 @@ input[type="submit"]:active {
   margin: -50px 0 0 20px;
 }
 
-#signup_request_email {
+#beta_signup_email {
   font-size: 20px;
   font-weight: bold;
   height: 38px;
@@ -81,7 +81,12 @@ input[type="submit"]:active {
   width: 350px;
 }
 
-#signup_request_email.default {
+#beta_signup_email.default {
   color: #666;
   font-weight: normal;
+}
+
+p.success-message {
+  margin-bottom: 5px;
+  width: 400px;
 }
