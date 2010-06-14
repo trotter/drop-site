@@ -18,4 +18,10 @@ class BetaSignupTest < ActiveSupport::TestCase
     @beta_signup.email = "blah"
     assert !@beta_signup.valid?
   end
+
+  test "requires the email address to be unique" do
+    @beta_signup.save
+    invalid = BetaSignup.new(:email => @beta_signup.email)
+    assert !invalid.valid?
+  end
 end
