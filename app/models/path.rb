@@ -23,7 +23,6 @@ class Path < ActiveRecord::Base
   def create_website
     return if owned_website
     self.owned_website = Website.new_from_path(self)
-    self.website = self.owned_website
     owned_website.paths << self
     user.websites << owned_website
     owned_website
