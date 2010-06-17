@@ -23,6 +23,10 @@ include_recipe "apache2::mod_expires"
 include_recipe "passenger_apache2::mod_rails"
 
 package "coreutils" # Includes nohup, needed for our monit template
+package "libxml2"       # For nokogiri
+package "libxml2-dev"   # For nokogiri
+package "libxslt1.1"       # For nokogiri
+package "libxslt1-dev"   # For nokogiri
 
 gem_package "bundler"
 gem_package "rvm"
@@ -59,7 +63,7 @@ end
 %w(log pids).each do |shared_dir|
   directory "#{deploy_dir}/shared/#{shared_dir}" do
     owner node[:main_user]
-    group node[:main_user]
+    group node[:main_group]
     recursive true
   end
 end

@@ -1,0 +1,57 @@
+{
+  "dropsite_rails": {
+    "revision": "master",
+    "run_deploy": true,
+    "run_migrations": true,
+    "framework_env": "production",
+    "hostname": "simpletubes.com",
+    "repo": "git@github.com:trotter/drop-site.git",
+    "deploy_dir": "/srv/simpletubes"
+  },
+
+  "dropsite_sites": {
+    "hostname": "simpletubes.com"
+  },
+
+  "main_user": "trotter",
+  "main_group": "users",
+
+  "passenger": {
+    "version": "2.2.11"
+  },
+
+  "mysql": {
+    "bind-address": "0.0.0.0",
+    "server_root_password": ""
+  },
+
+  "apache": {
+    "contact": "cashion@gmail.com"
+  },
+
+  "ssh": {
+    "port": 22,
+    "private_keys": [ "dropsite_deploy" ]
+  },
+
+  "iptables": {
+    "tcp_ports": [80, 443]
+  },
+
+  "users": {
+    "trotter": {
+      "sudo": true,
+      "password": "$6$VMPGG3cl$XPwsM8BTbeb0XIBqK5I/d1BtjFv0fjG8vDmYAcJeKTAHH0frL1dtUh6ruM41nD1SujwMs5lJQTNGxcQstN/N9.",
+      "ssh_key": "ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAQEAuUVH+qEnz8Ic5h4eQwRB+5z/WDSCgvlK19CkuU10Xe2nF1p158PLty3nsnSmOsMoVqMZqVCAIGqcxUUNeb/DtTWWH4tbhxRu9fKZeGLhhs5iI3IRlMCYzNh1rnZUahUvyozu/E6sL1s2ka5CN5QMLe+QtSp4xDH5jHSLH+vLSnp5jtJP4AAmqMpiid2CAKnUGC37zSI4oaJjFdhpOluLBQFQCROqfvA+34JQWsoIViaBdeg0uyHnjGreZEfRl/cCw+wottB/XzBZyF5yqngJLckI4QD14kzdIxEpY8dkRsMP72whqzltBb3wpPojBLgec6mU0ZDQlJO5fgj04TKZlQ== cashion@gmail.com"
+    }
+  },
+
+  "recipes": [ "mysql::server",
+               "sshd",
+               "iptables",
+               "administrators",
+               "private_ssh_keys",
+               "dropsite",
+               "dropsite_sites"
+             ]
+}
