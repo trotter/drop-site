@@ -1,4 +1,6 @@
 class SessionsController < ApplicationController
+  before_filter :super_sekret_stuff_required, :only => :create
+
   def create
     dropbox_session = Dropbox::Session.new('iepvouixlhuo6dg', 'fhs5rghf6tz7ia9')
     session[:dropbox_session] = dropbox_session.serialize
@@ -14,4 +16,12 @@ class SessionsController < ApplicationController
 
     redirect_to websites_url
   end
+
+  private
+    def super_sekret_stuff_required
+      unless params[:super_sekret] == "awesomeTown"
+        flash[:errors] = "You can't do that! Sign-up instead :-)"
+        redirect_to root_url
+      end
+    end
 end
