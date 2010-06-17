@@ -13,6 +13,10 @@
     "hostname": "simpletubes.com"
   },
 
+  "rails": {
+    "max_pool_size": 2
+  },
+
   "main_user": "trotter",
   "main_group": "users",
 
