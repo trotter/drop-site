@@ -2,6 +2,11 @@ DropSite::Application.routes.draw do |map|
   get "websites/index"
 
   get '/' => 'static#welcome', :as => "root"
+  get 'olympus' => 'olympus/overview#show'
+
+  resources :olympus do
+    resource :overview
+  end
 
   resources :websites
   resources :beta_signups

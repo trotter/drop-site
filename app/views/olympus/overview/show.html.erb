@@ -1,0 +1,15 @@
+<h2><%= BetaSignup.count %> Beta Signups</h2>
+<ul>
+<%= render :partial => "beta_signup",
+           :collection => BetaSignup.order("created_at desc").limit(5) %>
+</ul>
+
+<h2><%= Website.count %> Websites</h2>
+
+<h2><%= User.count %> Users</h2>
+<ul>
+<%= render :partial => "user",
+           :collection => User.order("created_at desc").limit(5) %>
+</ul>
+
+<h2><%= Path.count %> Paths</h2>
