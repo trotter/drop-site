@@ -4,8 +4,7 @@ class BetaSignupsControllerTest < ActionController::TestCase
   test "should create a beta signup" do
     assert_difference "BetaSignup.count" do
       post :create, :beta_signup => { :email => "test@example.com" }
-      assert_response :redirect
-      assert_not_nil flash[:success]
+      assert_redirected_to beta_signup_path
     end
   end
 

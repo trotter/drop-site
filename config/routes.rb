@@ -9,7 +9,7 @@ DropSite::Application.routes.draw do |map|
   end
 
   resources :websites
-  resources :beta_signups
+  resource  :beta_signup
 
   resource :session do
     get :finalize

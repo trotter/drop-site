@@ -101,3 +101,18 @@ p.success-message, .error-messages {
 .error-messages li {
   margin-bottom: 5px;
 }
+
+.beta_signups-show .content {
+  width: 500px;
+}
+
+.beta_signups-show h1 {
+  font-size: 30px;
+  margin-bottom: 20px;
+}
+
+.beta_signups-show p {
+  margin-bottom: 10px;
+  font-size: 16px;
+  line-height: 25px;
+}

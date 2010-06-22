@@ -20,7 +20,7 @@ address in the box below to register for the Beta and find out how SimpleTubes
 makes the Internet better.</p>
 
 <h2>Register for the Beta</h2>
-<%= form_for @beta_signup do |f| %>
+<%= form_for @beta_signup, :url => beta_signup_path do |f| %>
   <%= success_messages %>
   <%= error_messages %>
   <%= f.text_field :email, :class => "default", :value => "Type your email address here!" %> &raquo; <%= f.label :email, "Email Address" %><br />

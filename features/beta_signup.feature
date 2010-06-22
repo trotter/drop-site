@@ -7,7 +7,9 @@ Feature: Beta Signup
     Given I am on the root page
     When I fill in "Email Address" with "test@example.com"
     And I press "Sign-up Now"
-    Then I should see "Thank you"
+    Then I should see "Thank You"
+    When I follow "Click here"
+    Then I should see "Register for"
 
   Scenario: Signing up with an invalid email
     Given I am on the root page
