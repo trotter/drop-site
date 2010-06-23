@@ -28,7 +28,10 @@ package "libxml2-dev"   # For nokogiri
 package "libxslt1.1"       # For nokogiri
 package "libxslt1-dev"   # For nokogiri
 
-gem_package "bundler"
+gem_package "bundler" do
+  version "0.9.26"
+end
+
 gem_package "rvm"
 
 deploy_dir = node[:dropsite_rails][:deploy_dir]
@@ -84,7 +87,7 @@ deploy deploy_dir do
 
   # Before migrating, we want to run bundler and create the db
   before_migrate do
-    system %Q{cd #{release_path}; bundle install --without=test --without=development}
+    system %Q{cd #{release_path}; bundle install --without=test}
     system %Q{su -l #{node[:main_user]} -m -c "cd #{release_path}; rake db:create:all"}
   end
 
