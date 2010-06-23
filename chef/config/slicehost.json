@@ -21,7 +21,7 @@
   "main_group": "users",
 
   "passenger": {
-    "version": "2.2.11"
+    "version": "2.2.14"
   },
 
   "mysql": {
