@@ -1,6 +1,6 @@
 {
   "dropsite_rails": {
-    "revision": "head",
+    "revision": "master",
     "run_deploy": true,
     "run_migrations": true,
     "framework_env": "production",
