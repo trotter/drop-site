@@ -9,6 +9,8 @@ gem 'mysql'
 gem 'rdropbox', :require => 'dropbox', :git => 'git://github.com/trotter/dropbox.git'
 gem 'ruby-debug'
 
+gem 'newrelic_rpm', :require => false
+
 group :development do
   gem 'mongrel'
 end

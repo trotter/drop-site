@@ -16,6 +16,12 @@ dependencies:
     group: 
     - :default
     version: ">= 0"
+  newrelic_rpm: 
+    group: 
+    - :default
+    version: ">= 0"
+    require: []
+
   mocha: 
     group: 
     - :test
@@ -125,6 +131,8 @@ specs:
     version: 1.0.1
 - mysql: 
     version: 2.8.1
+- newrelic_rpm: 
+    version: 2.12.3
 - oauth: 
     version: 0.4.1
 - thor: 
@@ -140,7 +148,7 @@ specs:
     version: 0.10.3
 - ruby-debug: 
     version: 0.10.3
-hash: c234eb24ff63723b29d7f479c038f39ccabe0596
+hash: 12a7fce8e58c96633c96a0ed947ce4301a91288f
 sources: 
 - Git: 
     uri: git://github.com/trotter/dropbox.git
