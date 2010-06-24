@@ -22,6 +22,8 @@ class ActiveSupport::TestCase
     @mock_session.stubs(:account).returns({:display_name => "Trotter Cashion"}.to_struct)
     @mock_session.stubs(:authorize)
     @mock_session.stubs(:serialize).returns("serialized_session")
+    @mock_session.stubs(:authorize_url).returns("http://fake.dropbox/authorize")
+    Dropbox::Session.stubs(:new).returns(@mock_session)
     Dropbox::Session.stubs(:deserialize).returns(@mock_session)
   end
 

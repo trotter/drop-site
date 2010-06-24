@@ -3,6 +3,7 @@ DropSite::Application.routes.draw do |map|
 
   get '/' => 'static#welcome', :as => "root"
   get 'olympus' => 'olympus/overview#show'
+  get 'status' => 'status#show'
 
   resources :olympus do
     resource :overview
